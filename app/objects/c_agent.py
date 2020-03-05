@@ -84,6 +84,8 @@ class Agent(BaseObject):
         self.last_seen = now
         if self.trusted:
             self.last_trusted_seen = now
+        if kwargs.get('error'):
+            self.update('contact', kwargs.get('contact'))
         self.update('pid', kwargs.get('pid'))
         self.update('ppid', kwargs.get('ppid'))
         self.update('server', kwargs.get('server'))
@@ -95,7 +97,6 @@ class Agent(BaseObject):
         self.update('architecture', kwargs.get('architecture'))
         self.update('platform', kwargs.get('platform'))
         self.update('executors', kwargs.get('executors'))
-        self.update('contact', kwargs.get('contact'))
 
     async def gui_modification(self, **kwargs):
         self.update('group', kwargs.get('group'))
